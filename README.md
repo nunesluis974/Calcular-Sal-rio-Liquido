@@ -1,4 +1,4 @@
-#Descrição do site – Calculadora de Salário Líquido
+
 
 A Calculadora de Salário Líquido é uma ferramenta simples e eficiente que permite ao usuário descobrir quanto realmente recebe após os descontos obrigatórios.
 
