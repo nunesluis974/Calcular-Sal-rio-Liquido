@@ -84,7 +84,7 @@ async function calcular() {
     const descontos = parseFloat(document.getElementById("descontos").value) || 0;
     const adicionais = parseFloat(document.getElementById("adicionais").value) || 0;
 
-    const resposta = await fetch(fetch("https://calcular-salario-liquido.onrender.com/calcular", {
+    const resposta = await fetch("https://calcular-sal-rio-liquido.onrender.com/calcular", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
