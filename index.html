@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora de Salário</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 12px;
+    width: 320px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #22c55e;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #16a34a;
+}
+
+.resultado {
+    margin-top: 20px;
+    background: #020617;
+    padding: 15px;
+    border-radius: 8px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>💰 Calculadora</h2>
+
+    <input type="number" id="salario" placeholder="Salário">
+    <input type="number" id="descontos" placeholder="Outros descontos">
+    <input type="number" id="adicionais" placeholder="Adicionais">
+
+    <button onclick="calcular()">Calcular</button>
+
+    <div class="resultado" id="resultado"></div>
+</div>
+
+<script>
+function formatar(valor) {
+    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
+
+async function calcular() {
+    const salario = parseFloat(document.getElementById("salario").value) || 0;
+    const descontos = parseFloat(document.getElementById("descontos").value) || 0;
+    const adicionais = parseFloat(document.getElementById("adicionais").value) || 0;
+
+    const resposta = await fetch("http://localhost:5000/calcular", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ salario, descontos, adicionais })
+    });
+
+    const dados = await resposta.json();
+
+    document.getElementById("resultado").innerHTML = `
+        <p>INSS: ${formatar(dados.inss)}</p>
+        <p>IRRF: ${formatar(dados.irrf)}</p>
+        <p><strong>Salário Líquido: ${formatar(dados.liquido)}</strong></p>
+    `;
+}
+</script>
+
+</body>
+</html>
