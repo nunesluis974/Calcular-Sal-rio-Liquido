@@ -2,84 +2,195 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<h1>Calculadora de Salário Líquido 2026</h1>
-<p>Descubra quanto você realmente recebe após descontos de INSS e IRRF.</p>
+<title>Calculadora de Salário Líquido 2026</title>
 
-<meta name="description" content="Calcule seu salário líquido com INSS e IRRF atualizados. Ferramenta gratuita, rápida e precisa para 2026.">
-
-<meta name="keywords" content="salário líquido, calculadora INSS, IRRF 2026, calcular salário líquido">
-
+<meta name="description" content="Calcule seu salário líquido com INSS e IRRF atualizados.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<h2>Como funciona o cálculo?</h2>
-<p>O salário líquido é calculado descontando INSS, IRRF e outros valores do salário bruto...</p>
+
 <style>
 body {
-    font-family: Arial, sans-serif;
-    background: #0f172a;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #020617);
     color: #fff;
+    margin: 0;
+    padding: 20px;
+}
+
+/* FUNDO GLASS */
+body::before {
+    content: "";
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    background: #22c55e;
+    filter: blur(120px);
+    top: -100px;
+    left: -100px;
+    opacity: 0.2;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background: #3b82f6;
+    filter: blur(120px);
+    bottom: -100px;
+    right: -100px;
+    opacity: 0.2;
+}
+
+/* LAYOUT */
+.wrapper {
+    max-width: 1100px;
+    margin: auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    gap: 40px;
+    flex-wrap: wrap;
 }
 
+/* TEXTO */
+.texto {
+    flex: 1;
+    min-width: 280px;
+}
+
+/* CARD GLASS */
 .container {
-    background: #1e293b;
-    padding: 30px;
-    border-radius: 12px;
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 25px;
+    border-radius: 16px;
     width: 320px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
+/* INPUT */
 input {
     width: 100%;
     padding: 10px;
-    margin-bottom: 12px;
-    border-radius: 6px;
+    margin-bottom: 10px;
+    border-radius: 8px;
     border: none;
+    background: rgba(255,255,255,0.1);
+    color: white;
 }
 
+/* BOTÃO */
 button {
     width: 100%;
     padding: 12px;
-    background: #22c55e;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
     border: none;
-    border-radius: 6px;
+    border-radius: 10px;
     color: white;
     font-weight: bold;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 button:hover {
-    background: #16a34a;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(34,197,94,0.6);
 }
 
+/* RESULTADO */
 .resultado {
-    margin-top: 20px;
-    background: #020617;
+    margin-top: 15px;
+    background: rgba(2,6,23,0.6);
     padding: 15px;
-    border-radius: 8px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+/* TABELAS */
+table {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th, td {
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background: rgba(255,255,255,0.05);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
 }
 </style>
-
 </head>
+
 <body>
 
-<div class="container">
-    <h2>💰 Calculadora</h2>
+<div class="wrapper">
 
-    <input type="number" id="salario" placeholder="Salário">
+<!-- TEXTO -->
+<div class="texto">
+    <h1>Calculadora de Salário Líquido 2026</h1>
+
+    <p>
+    Descubra quanto você realmente recebe após descontos de INSS e IRRF.
+    </p>
+
+    <h2>Como funciona?</h2>
+    <p>
+    O cálculo considera o salário bruto, aplica o INSS progressivo e calcula o IRRF sobre a base após os descontos.
+    </p>
+
+    <h3>Tabela INSS</h3>
+    <table>
+        <tr><th>Faixa</th><th>Alíquota</th></tr>
+        <tr><td>Até R$ 1.621</td><td>7.5%</td></tr>
+        <tr><td>Até R$ 2.902,84</td><td>9%</td></tr>
+        <tr><td>Até R$ 4.354,27</td><td>12%</td></tr>
+        <tr><td>Até R$ 8.475,55</td><td>14%</td></tr>
+    </table>
+
+    <h3>Tabela IRRF</h3>
+    <table>
+        <tr><th>Faixa</th><th>Alíquota</th><th>Dedução</th></tr>
+        <tr><td>Até R$ 2.259,20</td><td>Isento</td><td>0</td></tr>
+        <tr><td>Até R$ 2.826,65</td><td>7.5%</td><td>169,44</td></tr>
+        <tr><td>Até R$ 3.751,05</td><td>15%</td><td>381,44</td></tr>
+        <tr><td>Até R$ 4.664,68</td><td>22.5%</td><td>662,77</td></tr>
+        <tr><td>Acima</td><td>27.5%</td><td>896,00</td></tr>
+    </table>
+</div>
+
+<!-- CALCULADORA -->
+<div class="container">
+    <h2>💰 Calculadora Inteligente</h2>
+
+    <input type="number" id="salario" placeholder="Salário bruto">
     <input type="number" id="descontos" placeholder="Outros descontos">
     <input type="number" id="adicionais" placeholder="Adicionais">
 
     <button onclick="calcular()">Calcular</button>
 
     <div class="resultado" id="resultado"></div>
+</div>
+
 </div>
 
 <script>
@@ -92,21 +203,25 @@ async function calcular() {
     const descontos = parseFloat(document.getElementById("descontos").value) || 0;
     const adicionais = parseFloat(document.getElementById("adicionais").value) || 0;
 
-const resposta = await fetch("https://calcular-sal-rio-liquido.onrender.com/calcular", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ salario, descontos, adicionais })
-    });
+    try {
+        const resposta = await fetch("https://calcular-sal-rio-liquido.onrender.com/calcular", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ salario, descontos, adicionais })
+        });
 
-    const dados = await resposta.json();
+        const dados = await resposta.json();
 
-    document.getElementById("resultado").innerHTML = `
-        <p>INSS: ${formatar(dados.inss)}</p>
-        <p>IRRF: ${formatar(dados.irrf)}</p>
-        <p><strong>Salário Líquido: ${formatar(dados.liquido)}</strong></p>
-    `;
+        document.getElementById("resultado").innerHTML = `
+            <p>INSS: ${formatar(dados.inss)}</p>
+            <p>IRRF: ${formatar(dados.irrf)}</p>
+            <p><strong>Salário Líquido: ${formatar(dados.liquido)}</strong></p>
+        `;
+    } catch (erro) {
+        document.getElementById("resultado").innerHTML = "Erro ao calcular.";
+    }
 }
 </script>
 
