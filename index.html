@@ -1,14 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora de Salário</title>
+</head>
+<body>
+
+<h2>Calculadora de Salário</h2>
+
+<label>Salário bruto:</label><br>
+<input type="text" id="salario"><br><br>
+
+<label>Descontos:</label><br>
+<input type="text" id="descontos"><br><br>
+
+<label>Adicionais:</label><br>
+<input type="text" id="adicionais"><br><br>
+
+<button onclick="calcular()">Calcular</button>
+
+<div id="resultado" style="margin-top:20px;"></div>
+
 <script>
+function parseBR(valor) {
+    return parseFloat(valor.replace(/\./g, '').replace(',', '.')) || 0;
+}
+
 function formatar(valor) {
+    valor = Number(valor.toFixed(2));
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
 function calcular() {
-    const salario = parseFloat(document.getElementById("salario").value) || 0;
-    const descontos = parseFloat(document.getElementById("descontos").value) || 0;
-    const adicionais = parseFloat(document.getElementById("adicionais").value) || 0;
+    const salario = parseBR(document.getElementById("salario").value);
+    const descontos = parseBR(document.getElementById("descontos").value);
+    const adicionais = parseBR(document.getElementById("adicionais").value);
 
-    // INSS
     let inss = 0;
 
     if (salario <= 1621) {
@@ -31,7 +58,6 @@ function calcular() {
                ((8475.55 - 4354.27) * 0.14);
     }
 
-    // Base IRRF
     let base = salario + adicionais - inss - descontos;
 
     let irrf = 0;
@@ -59,3 +85,6 @@ function calcular() {
     `;
 }
 </script>
+
+</body>
+</html>
